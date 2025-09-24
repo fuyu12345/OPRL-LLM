@@ -8,7 +8,6 @@ export RAY_TMPDIR="/tmp/ray_tmp"
 module load GCC/13.3.0
 export CC=$(which gcc)
 
-export CUDA_HOME=/p/software/jurecadc/stages/2025/software/CUDA/12
 export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 export CUDNN_HOME=~/libs/cudnn-9.8

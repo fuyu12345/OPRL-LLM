@@ -1,5 +1,5 @@
 set -x
-LOGDIR=/path/to/output_logs
+LOGDIR=/your_path/output_logs
 mkdir -p "$LOGDIR"
 exec > >(tee -i "$LOGDIR/SFT_Llama-3.2-3B-Instruct-summary-im$(date +%Y%m%d_%H%M%S).log") 2>&1
 
@@ -7,8 +7,6 @@ export RAY_TMPDIR="/tmp/ray_tmp"
 
 module load GCC/13.3.0
 export CC=$(which gcc)
-
-export CUDA_HOME=/p/software/jurecadc/stages/2025/software/CUDA/12
 export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
