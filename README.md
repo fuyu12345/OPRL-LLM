@@ -1,4 +1,4 @@
-# Overton-Pluralistic-GRPO
+# Overton Pluralistic Reinforcement Learning for Large Language Models
 
 This repository provides a complete OP–GRPO implementation pipeline, offering an end-to-end framework for aligning large language models with Overton pluralism. It covers all key stages: data preprocessing with redundancy filtering and perspective augmentation to build high-quality, diverse datasets; training with GRPO, extended by an OP-specific reward system that incorporates perspective coverage, uniqueness, and formatting consistency; and evaluation, using ValuePrism NLI benchmarks, coverage metrics, and token efficiency analysis.
 
