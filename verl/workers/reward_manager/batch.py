@@ -76,9 +76,9 @@ class BatchRewardManager:
         scaled_uni_list = []
         for i in range(len(scores)):
             score_obj = scores[i]
-            raw_sim = sim_reward_last[i].item()         # 0‑5
-            raw_uniq = uniq_reward_last[i].item()       # 0‑1
-            raw_tag_fmt = tag_format_rewards_last[i].item()  # -3 or 0
+            raw_sim = sim_reward_last[i].item()         
+            raw_uniq = uniq_reward_last[i].item()       
+            raw_tag_fmt = tag_format_rewards_last[i].item()  
             raw_tag_fmt_list.append(raw_tag_fmt) 
 
             if isinstance(score_obj, dict):
@@ -88,13 +88,13 @@ class BatchRewardManager:
 
             # scaling 
             scaled_sim = raw_sim * 0.3               
-            scaled_fmt = raw_fmt * 0.125 
-            scaled_uniq = raw_uniq * 0.25                
+            scaled_fmt = raw_fmt * 0.1
+            scaled_uniq = raw_uniq * 0.3                
             scaled_sim_list.append(scaled_sim)
             scaled_fmt_list.append(scaled_fmt)
             scaled_uni_list.append(scaled_uniq)
 
-            total = scaled_sim + scaled_fmt  + raw_tag_fmt + scaled_uniq # ≤ 3.0 
+            total = scaled_sim + scaled_fmt  + raw_tag_fmt + scaled_uniq 
             total = max(total, 0.0) 
          
 
