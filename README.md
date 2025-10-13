@@ -19,14 +19,11 @@ This is the core folder of the project, as it provides the main training framewo
 This folder contains the training process for the OP-SBERT model. It includes the construction of triplet datasets, hyperparameter optimization, and the final fine-tuning stage. The full pipeline can be executed using the provided `run_trainer.sh` bash script.
 
 ###  `benchmark_new/`
-This folder contains the test datasets and evaluation tools, including inference scripts for trained models, GPT-4.1 as an LLM-judge, natural language inference benchmarks, SBERT-based similarity checks, and token generation analysis, providing a comprehensive framework for evaluating OP-GRPO performance.
-
-
----
+This folder contains the test datasets and evaluation tools, including inference scripts for trained models, GPT-4.1 as an LLM-judge and natural language inference benchmarks, providing a comprehensive framework for evaluating OP-GRPO performance.
 
 
 
-## 🚀 Installation and Usage
+##  Installation and Usage
 
 To install all required packages:
 
@@ -40,9 +37,9 @@ Running Instructions
 2. Before starting GRPO training, you may fine-tune the SBERT model to improve its performance for the OP-GRPO stage.
 3. Run the run_grpo.sh script to launch OP-GRPO training.
 
-## 🚨 Important Notification
+##  Important Notification
 1. Please modoify all of the file path in your place, to replace the current path.
 
 2. This project is build on the base of [**Verl**](https://github.com/volcengine/verl): which provides a flexible and efficient foundation for reinforcement learning with large language models. Verl is designed to support diverse RL algorithms such as PPO and GRPO, while offering high-performance GPU utilization and modular extensibility.
 
-3. The Modular Pluralism method inference and evalaution can refer [**Modular Pluralism**](https://github.com/BunsenFeng/modular_pluralism)
+3. The Modular Pluralism method inference and evalaution can refer [**Modular Pluralism**](https://github.com/BunsenFeng/modular_pluralism) For **NLI (Natural Language Inference) evaluation**, please note that it requires a separate environment. You can also refer to the [**Modular Pluralism**](https://github.com/BunsenFeng/modular_pluralism) repository for environment setup and detailed evaluation instructions.
