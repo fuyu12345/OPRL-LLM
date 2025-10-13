@@ -8,7 +8,6 @@ from sentence_transformers.evaluation import EmbeddingSimilarityEvaluator, Simil
 from sentence_transformers.training_args import BatchSamplers
 from datasets import load_dataset
 
-# Load  CSV 
 full_dataset = load_dataset("csv", data_files="triplet_dataset_new.csv")["train"]
 split_dataset = full_dataset.train_test_split(test_size=0.1, seed=42)
 train_dataset = split_dataset["train"]
@@ -25,10 +24,8 @@ def hpo_search_space(trial):
         
     }
 
-
 def hpo_model_init(trial):
     return SentenceTransformer("sentence-transformers/paraphrase-mpnet-base-v2")
-
 
 def hpo_loss_init(model):
    
@@ -36,8 +33,6 @@ def hpo_loss_init(model):
 
 def hpo_compute_objective(metrics):
     return -metrics["eval_loss"] 
-
-
 
 training_args = SentenceTransformerTrainingArguments(
     output_dir="/your_path/st_models/hpo",
@@ -50,7 +45,6 @@ training_args = SentenceTransformerTrainingArguments(
     logging_steps=10,
     run_name="mnr-csv-hpo"
 )
-
 
 trainer = SentenceTransformerTrainer(
     model=None,

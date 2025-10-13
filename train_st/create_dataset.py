@@ -21,29 +21,21 @@ logfile = os.path.join(
 )
 sys.stdout = open(logfile, "w")
 sys.stderr = sys.stdout
-
-# nltk resources
 nltk.download("punkt")
 nltk.download("stopwords")
 
 # paths
 CSV_PATH = "/your_path/Overton-PPO/eval_LLM_test/valueprism.csv"
 OUT_CSV = "/your_path/Overton-PPO/train_st/triplet_dataset.csv"
-
 # hyper‑parameters
 SIM_THRESHOLD = 0.75  # embedding threshold
 EMBED_MODEL = "paraphrase-mpnet-base-v2"
 REPEAT_VOTES = 1      # number of generations in majority vote
-
-# devices & models
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 embed_model = SentenceTransformer(EMBED_MODEL, device=DEVICE)
-
-LLM_PATH = "/your_path/HF_models/Qwen3-8B"
+LLM_PATH = "/your_path/HF_models"
 tokenizer = AutoTokenizer.from_pretrained(LLM_PATH, trust_remote_code=True)
-llm_model = AutoModelForCausalLM.from_pretrained(
-    LLM_PATH, device_map="auto", torch_dtype=torch.float16, trust_remote_code=True
-)
+llm_model = AutoModelForCausalLM.from_pretrained(LLM_PATH, device_map="auto", torch_dtype=torch.float16, trust_remote_code=True)
 llm_model.eval()
 
 
@@ -125,7 +117,6 @@ for row_id, row in df.iterrows():
     masked = [mask_keywords(s, keywords) for s in sentences]
     embs = embed_model.encode(masked, convert_to_tensor=True, normalize_embeddings=True)
 
-    # compute all upper‑tri similarities and filter by threshold
     candidate_pairs: list[tuple[int, int, float]] = []  
     for i, j in combinations(range(len(sentences)), 2):
         sim = float(util.cos_sim(embs[i], embs[j]))
@@ -136,12 +127,11 @@ for row_id, row in df.iterrows():
         print(f"[{row_id}] No pairs ≥ {SIM_THRESHOLD} – skipped.")
         continue
 
-    # sort pairs by sim desc
+    # sort pairs
     candidate_pairs.sort(key=lambda t: t[2], reverse=True)
 
     anchor_idx = positive_idx = None
 
-    #  find first anchor‑positive match via LLM
     for i, j, sim in candidate_pairs:
         verdict = llm_majority_vote((sentences[i], sentences[j]))
         print(f"[{row_id}] Trying pair (i={i}, j={j}, sim={sim:.3f}) – LLM: {verdict}")
@@ -181,7 +171,7 @@ for row_id, row in df.iterrows():
     )
     print(f"[{row_id}] Triplet saved.")
 
-# SAVE
+
 triplet_df = pd.DataFrame(triplet_rows)
 triplet_df.to_csv(OUT_CSV, index=False)
 print(f"\n Done. Triplet dataset written to {OUT_CSV} (n_rows={len(triplet_df)}).")

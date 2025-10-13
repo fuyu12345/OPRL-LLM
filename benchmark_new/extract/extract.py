@@ -4,13 +4,10 @@ import pandas as pd
 from datetime import datetime
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
-MODEL_DIR = "/your_path/verl/output_model/hf_models/hf_grpo-Llama-3.2-3B-Instruct-im-rewardscaledown-unique-12k"
-
-# Directories and file patterns for loop
+MODEL_DIR = "/your_path/verl/output_model/hf_models/<your_model>"
 REFERENCE_DIR = "/your_path/verl/benchmark/dataset"
 OUTPUT_DIR = "generated_outputs"
 LABELS = [ "5p","6p","7p","8p","9p","10p","gt10p" ]
-
 BATCH_SIZE = 1
 MAX_NEW = 1200
 BASE_TEMP = 0.7

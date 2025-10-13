@@ -12,9 +12,7 @@ CANDIDATE_TPL = "test_{label}_gen.csv"
 LABELS = ["5p","10p"]
 CANDIDATE_COL = "answers"
 
-# Load tokenizer (adjust to your model)
 tokenizer = AutoTokenizer.from_pretrained("/your_path/")
-
 label_avg_tokens = {}
 all_tokens = []
 
@@ -31,7 +29,6 @@ for label in LABELS:
     label_avg_tokens[label] = avg_tokens
     all_tokens.extend(tokens_per_row)
 
-# Print results
 for label, avg in label_avg_tokens.items():
     print(f"{label}: {avg:.2f} tokens on average")
 

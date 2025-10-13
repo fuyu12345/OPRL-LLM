@@ -14,25 +14,21 @@ from openai import OpenAI
 
 
 
-INPUT_CSV   = "/your_path/test_5p_gen.csv"
+
 # Column names in your CSV
 COL_QUERY   = "prompt"
-# COL_OUTPUT  = "llm_analysis"
 COL_OUTPUT  = "answers"
 
-# Output dirs
-LOGDIR      = "/your_path/benchmark_new/llm_eval/logs"
-OUTDIR      = "/your_path/benchmark_new/llm_eval/output"
+INPUT_CSV   = os.environ.get("INPUT_CSV", "test_5p_gen.csv")
+LOGDIR      = os.environ.get("LOGDIR", "./logs")
+OUTDIR      = os.environ.get("OUTDIR", "./output")
 os.makedirs(LOGDIR, exist_ok=True)
 os.makedirs(OUTDIR, exist_ok=True)
 
-# Data size
-N_ROWS      = 300          # total rows to evaluate
-CHUNK_SIZE  = 50           # rows per batch job (sequential submission)
-
-# Model & tokens
+N_ROWS      = int(os.environ.get("N_ROWS", 300))
+CHUNK_SIZE  = int(os.environ.get("CHUNK_SIZE", 50))
+MAX_OUTPUT_TOKENS = int(os.environ.get("MAX_OUTPUT_TOKENS", 450))
 MODEL_NAME  = os.environ.get("JUDGE_MODEL", "gpt-4o-mini")  
-MAX_OUTPUT_TOKENS = 450    
 
 # Batch settings
 COMPLETION_WINDOW = "24h"

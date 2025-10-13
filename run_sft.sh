@@ -1,7 +1,3 @@
-set -x
-LOGDIR=/your_path/output_logs
-mkdir -p "$LOGDIR"
-exec > >(tee -i "$LOGDIR/SFT_Llama-3.2-3B-Instruct-summary-im$(date +%Y%m%d_%H%M%S).log") 2>&1
 
 export RAY_TMPDIR="/tmp/ray_tmp"
 
@@ -23,16 +19,22 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 
 
 
+export DATA_DIR=/path/to/verl/train_dataset/sft_ex_sum_full_implicit
+export MODEL_DIR=/path/to/verl/HF_models_datasets/models/Llama-3.2-3B-Instruct
+export OUTPUT_DIR=/path/to/verl/output_model/sft_Llama-3.2-3B-Instruct_summary_full_1epoch-im
+export PROJECT_NAME=Llama-3.2-3B-Instruct-Instruct-OPV2-SFT-summary-im
+export EXPERIMENT_NAME=Llama-3.2-3B-Instruct-OPV2-SFT-summary-im
+
 torchrun --nproc_per_node=4 -m verl.trainer.fsdp_sft_trainer \
-    data.train_files=/your_path/verl/train_dataset/sft_ex_sum_full_implicit/train.parquet \
-    data.val_files=/your_path/verl/train_dataset/sft_ex_sum_full_implicit/test.parquet \
+    data.train_files=${DATA_DIR}/train.parquet \
+    data.val_files=${DATA_DIR}/test.parquet \
     data.prompt_key=flattened_prompt \
     data.response_key=flattened_response \
     data.max_length=1300 \
     data.micro_batch_size_per_gpu=8 \
-    model.partial_pretrain=/your_path/verl/HF_models_datasets/models/Llama-3.2-3B-Instruct \
-    trainer.project_name=Llama-3.2-3B-Instruct-Instruct-OPV2-SFT-summary-im \
-    trainer.experiment_name=Llama-3.2-3B-Instruct-OPV2-SFT-summary-im \
+    model.partial_pretrain=${MODEL_DIR} \
+    trainer.project_name=${PROJECT_NAME} \
+    trainer.experiment_name=${EXPERIMENT_NAME} \
     trainer.total_epochs=1 \
-    trainer.logger=['console'] \
-    trainer.default_local_dir=/your_path/verl/output_model/sft_Llama-3.2-3B-Instruct_summary_full_1epoch-im \
+    trainer.logger="['console']" \
+    trainer.default_local_dir=${OUTPUT_DIR}
