@@ -2,11 +2,7 @@
 
 This repository provides a complete OP–GRPO implementation pipeline, offering an end-to-end framework for aligning large language models with Overton pluralism. It covers all key stages: data preprocessing with redundancy filtering and perspective augmentation to build high-quality, diverse datasets; training with GRPO, extended by an OP-specific reward system that incorporates perspective coverage, uniqueness, and formatting consistency; and evaluation, using ValuePrism NLI benchmarks, coverage metrics, and token efficiency analysis.
 
-The dataset is available on Hugging Face:
-
-[![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-OP--V2-yellow.svg)](https://huggingface.co/datasets/Rich740804/OP-V2)
-
-**Dataset available at:** [https://huggingface.co/datasets/Rich740804/OP-V2](https://huggingface.co/datasets/Rich740804/OP-V2)
+The dataset is available on Hugging Face: [![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-OP--V2-yellow.svg)](https://huggingface.co/datasets/Rich740804/OP-V2)
 
 ### 📁 **OP-GRPO Folder Structure**
 
