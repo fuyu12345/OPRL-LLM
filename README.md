@@ -2,9 +2,6 @@
 
 This repository provides a complete OP–GRPO implementation pipeline, offering an end-to-end framework for aligning large language models with Overton pluralism. It covers all key stages: data preprocessing with redundancy filtering and perspective augmentation to build high-quality, diverse datasets; training with GRPO, extended by an OP-specific reward system that incorporates perspective coverage, uniqueness, and formatting consistency; and evaluation, using ValuePrism NLI benchmarks, coverage metrics, and token efficiency analysis.
 
-The dataset is available on Hugging Face: 
-[![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-OP--V2-yellow.svg)](https://huggingface.co/datasets/Rich740804/OP-V2)
-
 ### 📁 **OP-GRPO Folder Structure**
 
 ###  `data_preprocess/`
@@ -20,7 +17,7 @@ This is the core folder of the project, as it provides the main training framewo
 This folder contains the training process for the OP-SBERT model. It includes the construction of triplet datasets, hyperparameter optimization, and the final fine-tuning stage. The full pipeline can be executed using the provided `run_trainer.sh` bash script.
 
 ###  `benchmark_new/`
-This folder contains the test datasets and evaluation tools, including inference scripts for trained models, GPT-4.1 as an LLM-judge and natural language inference benchmarks, providing a comprehensive framework for evaluating OP-GRPO performance.
+This folder contains the test datasets and evaluation tools, including inference scripts for trained models, GPT-4.1 as an LLM-judge, natural language inference benchmarks and also the OP-Benchmark, providing a comprehensive framework for evaluating OP-GRPO performance.
 
 
 
